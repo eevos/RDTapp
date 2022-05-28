@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Cache;
+//use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Redis;
-
+//use Illuminate\Support\Facades\Redis;
+include_once('RedisQuery.php');
+include_once('functions.php');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,32 +22,14 @@ Route::get('/', function () {
 });
 
 Route::get('/redis', function () {
-    $redis = connectToRedis();
+    $redisResult = new RedisQuery();
 
-    $result = '';
-    for ($i = 0; $i<10;$i++){
-        $redis->set( $i, " popteshop : " . $i . "<br>");
-        $result .= $redis->get($i);
-    }
-    return $result;
+    return $redisResult->returnResult();
 });
 
 Route::get('/db', function () {
 //https://laravel.com/docs/9.x/database
-//    $result = DB::statement('select * from test'); // returns 1
-    DB::unprepared('update test set testcol = "kwarry" where testcol = "harry"');
-    // returns [1,harry]
-
-    return DB::select('select * from test');
+//    DB::unprepared('update test set testcol = "kwarry" where testcol = "harry"');
+    return DB::select('select count(*) from Voertuigen');
 });
 
-function connectToRedis(): \Predis\Client
-{
-    Predis\Autoloader::register();
-    return new Predis\Client(array(
-        "scheme" => "tcp",
-        "host" => "redis",
-        "port" => 6379,
-        "username"=>'root',
-        "password" => ''));
-}
