@@ -24,15 +24,17 @@ Route::get('/', function () {
 
 Route::get('/redis', function () {
 
-    $redisTest = new RedisTestSelect(100);
+    $redisTest = new RedisTestSelect(100, 'SelectTest');
     $redisTest->executeTest();
 
     $redisResult = DB::select('select * from TestRuns');
+    array_unshift($redisResult,'Resultaten : ');
+
     return $redisResult;
 });
 
 Route::get('/db', function () {
-//https://laravel.com/docs/9.x/database
+    //https://laravel.com/docs/9.x/database
     return DB::select('select count(*) from TestRuns');
 });
 

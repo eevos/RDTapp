@@ -9,11 +9,13 @@ abstract class RedisTest
     protected $startTime;
     protected $endTime;
     protected string $result;
+    protected string $testName;
 
-    function __construct(int $xinput){
+    function __construct(int $xinput, string $name){
         $this->redis    = connectToRedis();
         $this->x        = $xinput;
         $this->result   = '';
+        $this->testName = $name;
     }
     public function executeTest(){
 
@@ -35,6 +37,6 @@ abstract class RedisTest
     }
     protected function logExecutionTime($time){
         $time = 1010;
-        DB::insert("INSERT INTO rdtapp.TestRuns (name, executionTime) VALUES ('test from php', '.$time')");
+        DB::insert("INSERT INTO rdtapp.TestRuns (name, executionTime) VALUES ('.$this->testName', '.$time')");
     }
 }
