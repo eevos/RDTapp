@@ -5,15 +5,15 @@ use Illuminate\Support\Facades\DB;
 abstract class RedisTest
 {
     protected \Predis\Client $redis;
-    protected int $x;
+    protected int $amount;
     protected $startTime;
     protected $endTime;
     protected string $result;
     protected string $testName;
 
-    function __construct(int $xinput, string $name){
+    function __construct(int $amount, string $name){
         $this->redis    = connectToRedis();
-        $this->x        = $xinput;
+        $this->amount   = $amount;
         $this->result   = '';
         $this->testName = $name;
     }
@@ -23,20 +23,16 @@ abstract class RedisTest
 
     protected function startTime(){
         $this->startTime = microtime(true);
-        $this->result .= 'starttime : 0 ';
-        $this->result .= "<br>";
     }
 
     protected function endTime(){
         $this->endTime = microtime(true);
-        $this->result .= "<br>";
-        $this->result .= "<br>";
-        $this->result .= 'endtime 1000 : ' . $this->endTime - $this->startTime;
+
         $this->logExecutionTime(($this->endTime - $this->startTime));
 
     }
     protected function logExecutionTime($time){
-        $time = 1010;
-        DB::insert("INSERT INTO rdtapp.TestRuns (name, executionTime) VALUES ('.$this->testName', '.$time')");
+        DB::insert("INSERT INTO rdtapp.TestRuns (name, executionTime, amount)
+                                VALUES ('$this->testName', '$time', '$this->amount')");
     }
 }

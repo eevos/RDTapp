@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 //use Illuminate\Support\Facades\Redis;
 include_once('RedisTest.php');
-include_once('RedisTestSelect.php');
+include_once('TestController.php');
+include_once('RedisSelectTest.php');
 include_once('functions.php');
 /*
 |--------------------------------------------------------------------------
@@ -24,17 +25,14 @@ Route::get('/', function () {
 
 Route::get('/redis', function () {
 
-    $redisTest = new RedisTestSelect(100, 'SelectTest');
-    $redisTest->executeTest();
+    $controller  = new TestController();
+    $controller->Runtests();
 
-    $redisResult = DB::select('select * from TestRuns');
-    array_unshift($redisResult,'Resultaten : ');
+    $redisResult = array('Resultaten : ');
+    $queryResult = DB::select('select * from TestRuns order by reg_date desc');
+    array_push($redisResult,$queryResult);
 
     return $redisResult;
 });
 
-Route::get('/db', function () {
-    //https://laravel.com/docs/9.x/database
-    return DB::select('select count(*) from TestRuns');
-});
 
