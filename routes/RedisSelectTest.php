@@ -1,18 +1,20 @@
 <?php
 
-class RedisTestSelect extends RedisTest
+class RedisSelectTest extends RedisTest
 {
 
     public function executeTest(){
 
-        // filling table
-        for ($i = 0; $i < $this->x;$i++){
+        // prepare
+        for ($i = 0; $i < $this->amount; $i++){
             $this->redis->set( $i, " popteshop : " . $i);
         }
 
+
+        // execute
         $this->startTime();
-        // testing logic
-        for ($i = 0; $i < $this->x; $i++) {
+
+        for ($i = 0; $i < $this->amount; $i++) {
             $this->result .= $this->redis->get($i);
         }
         $this->endTime();
