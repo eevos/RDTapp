@@ -1,6 +1,6 @@
 <?php
 
-class RedisInsertTest extends RedisTest
+class InsertTestA extends RedisTest
 {
 
     public function executeTest(){
@@ -8,8 +8,9 @@ class RedisInsertTest extends RedisTest
         $this->startTime();
 
         for ($i = 0; $i < $this->amount; $i++){
-            $this->redis->set( $i, " popteshop : " . $i);
+            $this->redis->set( $i, " ABCD : " . $i);
         }
+
         $this->endTime();
 
     }

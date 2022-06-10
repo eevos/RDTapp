@@ -1,13 +1,13 @@
 <?php
 
-class RedisSelectTest extends RedisTest
+class SelectTestA extends RedisTest
 {
 
     public function executeTest(){
 
         // prepare
         for ($i = 0; $i < $this->amount; $i++){
-            $this->redis->set( $i, " popteshop : " . $i);
+            $this->redis->set( $i, " ABCD : " . $i);
         }
 
         // execute
@@ -16,6 +16,7 @@ class RedisSelectTest extends RedisTest
         for ($i = 0; $i < $this->amount; $i++) {
             $this->result .= $this->redis->get($i);
         }
+
         $this->endTime();
     }
 }

@@ -1,16 +1,11 @@
 <?php
 
-//use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-//use Illuminate\Support\Facades\Redis;
-include_once('RedisTest.php');
-include_once('TestController.php');
-include_once('RedisSelectTest.php');
-include_once('RedisInsertTest.php');
-include_once('RedisDeleteTest.php');
-include_once('RedisUpdateTest.php');
+
 include_once('functions.php');
+include_once('TestController.php');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +28,7 @@ Route::get('/redis', function () {
 
 
     $redisResult = array('Resultaten : ');
-    $queryResult = DB::select('select * from TestRuns order by reg_date desc');
+    $queryResult = DB::select('select * from TestRuns order by id desc');
     array_push($redisResult,$queryResult);
 
     return $redisResult;
