@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Route;
 include_once('RedisTest.php');
 include_once('TestController.php');
 include_once('RedisSelectTest.php');
+include_once('RedisInsertTest.php');
+include_once('RedisDeleteTest.php');
+include_once('RedisUpdateTest.php');
 include_once('functions.php');
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +30,7 @@ Route::get('/redis', function () {
 
     $controller  = new TestController();
     $controller->Runtests();
+
 
     $redisResult = array('Resultaten : ');
     $queryResult = DB::select('select * from TestRuns order by reg_date desc');
