@@ -10,7 +10,6 @@ class RedisSelectTest extends RedisTest
             $this->redis->set( $i, " popteshop : " . $i);
         }
 
-
         // execute
         $this->startTime();
 

@@ -1,4 +1,5 @@
 <?php
+use RedisInsertTest;
 
 class TestController
 {
@@ -13,15 +14,15 @@ class TestController
         );
 
         foreach ($amounts as &$amount) {
-//            $insertTest = new RedisInsertTest($amount, 'RedisInsertTest');
-//            $insertTest->executeTest();
+//            $deleteTest = new RedisDeleteTest($amount, 'RedisDeleteTest');
+//            $deleteTest->executeTest();
 
-            $selectTest = new RedisSelectTest($amount, 'RedisSelectTest');
-            $selectTest->executeTest();
+            $insertTest = new RedisInsertTest($amount, 'RedisInsertTest');
+            $insertTest->executeTest();
 
+//            $selectTest = new RedisSelectTest($amount, 'RedisSelectTest');
+//            $selectTest->executeTest();
 
         }
-
-
     }
 }
