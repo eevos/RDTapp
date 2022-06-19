@@ -17,7 +17,7 @@ abstract class RedisTest
         $this->result   = '';
         $this->testName = $name;
     }
-    public function executeTest(){
+    public function execute(){
 
     }
 

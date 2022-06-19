@@ -1,10 +1,10 @@
 <?php
 
 
-class SelectTestApipeline extends RedisTest
+class DeleteTestApipeline extends RedisTest
 {
 
-    public function executeTest()
+    public function execute()
     {
 
         // prepare

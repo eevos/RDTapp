@@ -3,7 +3,7 @@
 class InsertTestA extends RedisTest
 {
 
-    public function executeTest(){
+    public function execute(){
 
         $this->startTime();
 

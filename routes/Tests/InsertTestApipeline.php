@@ -2,7 +2,7 @@
 
 class InsertTestApipeline extends RedisTest
 {
-    public function executeTest()
+    public function execute()
     {
 
         $this->startTime();

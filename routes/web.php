@@ -21,17 +21,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/redis', function () {
+Route::get('/getAvgResults', function () {
 
     $controller  = new TestController();
     $controller->Runtests();
 
+    return getResults();
+});
 
-    $redisResult = array('Resultaten : ');
-    $queryResult = DB::select('select * from TestRuns order by id desc');
+function getResults() : array
+{
+    $redisResult = array();
+    $queryResult = DB::select(
+        'select
+                    name,
+                    amount,
+                    avg(executionTime)
+                from TestRuns
+                group by
+                    name,
+                    amount
+                order by name desc');
     array_push($redisResult,$queryResult);
 
     return $redisResult;
-});
-
-
+}
