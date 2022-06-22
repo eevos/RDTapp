@@ -21,5 +21,9 @@ class SelectTestB extends RedisTest
             // first: insert all these kentekens from DB :-)
         }
         $this->endTime();
+        $AB = $this->redis->hvals('0001ES');
+        $AA = $this->redis->hmget('0001ES', 'Voertuigsoort', 'Eerste_kleur');
+
     }
+
 }
