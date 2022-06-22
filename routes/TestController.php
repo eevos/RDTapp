@@ -11,7 +11,8 @@ include_once('Tests/InsertTestA.php');
 include_once('Tests/InsertTestApipeline.php');
 include_once('Tests/InsertTestB.php');
 include_once('Tests/InsertTestBpipeline.php');
-include_once('Tests/InsertTestBhash.php');
+include_once('Tests/InsertTestBHashPipeline.php');
+include_once('Tests/InsertTestCHashPipeline.php');
 
 include_once('Tests/DeleteTestA.php');
 include_once('Tests/DeleteTestApipeline.php');
@@ -55,17 +56,19 @@ class TestController
     {
         // INSERT
         //A	Insert … autos
-        $insertTest = new InsertTestA($amount, 'InsertA');
+        $insertTest = new InsertTestA($amount);
         $insertTest->execute();
-        $insertTest = new InsertTestApipeline($amount, 'InsertApipeline');
+        $insertTest = new InsertTestApipeline($amount);
         $insertTest->execute();
 
         //B	Insert … autos met 2 kleuren
-        $insertTest = new InsertTestB($amount, 'InsertB');
+        $insertTest = new InsertTestB($amount);
         $insertTest->execute();
-        $insertTest = new InsertTestBpipeline($amount, 'InsertTestBpipeline');
+        $insertTest = new InsertTestBpipeline($amount);
         $insertTest->execute();
-        $insertTest = new InsertTestBhash($amount, 'InsertTestBhash');
+        $insertTest = new InsertTestBHashPipeline($amount);
+        $insertTest->execute();
+        $insertTest = new InsertTestCHashPipeline($amount);
         $insertTest->execute();
 
 
