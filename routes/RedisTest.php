@@ -32,7 +32,10 @@ abstract class RedisTest
 
     }
     protected function logExecutionTime($time){
-        DB::insert("INSERT INTO rdtapp.TestRuns (name, executionTime, amount)
-                                VALUES ('$this->testName', '$time', '$this->amount')");
+        $itemsInRedisDB = $this->redis->dbsize();
+        $usedMemoryMB = $this->redis->info()['Memory']['used_memory'] / 1000;
+
+        DB::insert("INSERT INTO rdtapp.TestRuns (name, executionTime, amount, numberOfItems, usedMemoryMB)
+                                VALUES ('$this->testName', '$time', '$this->amount', '$itemsInRedisDB','$usedMemoryMB')");
     }
 }
