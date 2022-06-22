@@ -31,5 +31,7 @@ class InsertBHashPipeline extends RedisTest
         });
 
         $this->endTime();
+        $this->redis->flushdb();
+
     }
 }

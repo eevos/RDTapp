@@ -17,5 +17,7 @@ class InsertTestB extends RedisTest
             $this->redis->set($i, json_encode($arr));
         }
         $this->endTime();
+        $this->redis->flushdb();
+
     }
 }

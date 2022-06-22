@@ -12,6 +12,6 @@ class InsertTestA extends RedisTest
         }
 
         $this->endTime();
-
+        $this->redis->flushdb();
     }
 }

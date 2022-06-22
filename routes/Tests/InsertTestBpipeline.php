@@ -17,7 +17,7 @@ class InsertTestBpipeline extends RedisTest
             }
         });
 
-
         $this->endTime();
+        $this->redis->flushdb();
     }
 }

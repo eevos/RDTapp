@@ -15,6 +15,7 @@ class InsertTestApipeline extends RedisTest
                 $pipe->set($i, json_encode($arr));
             }
             $this->endTime();
+            $this->redis->flushdb();
         });
     }
 }

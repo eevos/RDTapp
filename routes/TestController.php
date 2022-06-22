@@ -13,6 +13,7 @@ include_once('Tests/InsertTestB.php');
 include_once('Tests/InsertTestBpipeline.php');
 include_once('Tests/InsertBHashPipeline.php');
 include_once('Tests/InsertCHashPipeline.php');
+include_once('Tests/InsertDHashPipeline.php');
 
 include_once('Tests/DeleteTestA.php');
 include_once('Tests/DeleteTestApipeline.php');
@@ -48,6 +49,9 @@ class TestController
 //            $this->executeSelectTests($amount);
 //            $this->executeDeleteTests($amount);
 //            $this->executeUpdateTests($amount);
+
+            $redis    = connectToRedis();
+            $redis->flushdb();
         }
 
     }
@@ -69,6 +73,8 @@ class TestController
         $insertTest = new InsertBHashPipeline($amount);
         $insertTest->execute();
         $insertTest = new InsertCHashPipeline($amount);
+        $insertTest->execute();
+        $insertTest = new InsertDHashPipeline($amount);
         $insertTest->execute();
 
 
