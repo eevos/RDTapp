@@ -1,6 +1,6 @@
 <?php
 
-class CreateIndexSelectTestB extends RedisTest
+class CreateIndexSelectB extends RedisTest
 {
 
     public function execute()

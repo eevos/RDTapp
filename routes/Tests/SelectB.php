@@ -1,6 +1,6 @@
 <?php
 
-class SelectTestB extends RedisTest
+class SelectB extends RedisTest
 {
 
     public function execute()
