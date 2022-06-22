@@ -1,6 +1,6 @@
 <?php
 
-class InsertTestBHashPipeline extends RedisTest
+class InsertBHashPipeline extends RedisTest
 {
     protected $table;
 
@@ -16,6 +16,7 @@ class InsertTestBHashPipeline extends RedisTest
         $this->startTime();
 
         $this->redis->pipeline(function ($pipe){
+            $i = 0;
             foreach ($this->table as $row) {
                 $pipe->hset($row->Kenteken
                     , 'Voertuigsoort', $row->Voertuigsoort
@@ -23,6 +24,9 @@ class InsertTestBHashPipeline extends RedisTest
                     , 'Tweede_kleur', $row->Tweede_kleur
                     , 'Voertuigsoort', $row->Voertuigsoort
                 );
+
+                $i++;
+                if($i == $this->amount){break;}
             }
         });
 

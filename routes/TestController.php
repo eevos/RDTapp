@@ -4,15 +4,15 @@ include_once('RedisTest.php');
 
 include_once('Tests/SelectTestA.php');
 include_once('Tests/SelectTestApipeline.php');
-include_once('Tests/CreateIndexSelectTestB.php');
-include_once('Tests/SelectTestB.php');
+include_once('Tests/CreateIndexSelectB.php');
+include_once('Tests/SelectB.php');
 
 include_once('Tests/InsertTestA.php');
 include_once('Tests/InsertTestApipeline.php');
 include_once('Tests/InsertTestB.php');
 include_once('Tests/InsertTestBpipeline.php');
-include_once('Tests/InsertTestBHashPipeline.php');
-include_once('Tests/InsertTestCHashPipeline.php');
+include_once('Tests/InsertBHashPipeline.php');
+include_once('Tests/InsertCHashPipeline.php');
 
 include_once('Tests/DeleteTestA.php');
 include_once('Tests/DeleteTestApipeline.php');
@@ -36,7 +36,7 @@ class TestController
 
     public function Runtests()
     {
-        $insertTest = new CreateIndexSelectTestB(1, 'CreateIndexSelectTestB');
+        $insertTest = new CreateIndexSelectB(1, 'CreateIndexSelectTestB');
         $insertTest->execute();
 
         foreach ($this->amounts as &$amount) {
@@ -66,9 +66,9 @@ class TestController
         $insertTest->execute();
         $insertTest = new InsertTestBpipeline($amount);
         $insertTest->execute();
-        $insertTest = new InsertTestBHashPipeline($amount);
+        $insertTest = new InsertBHashPipeline($amount);
         $insertTest->execute();
-        $insertTest = new InsertTestCHashPipeline($amount);
+        $insertTest = new InsertCHashPipeline($amount);
         $insertTest->execute();
 
 
@@ -95,7 +95,7 @@ class TestController
         $selectTest = new SelectTestApipeline($amount, 'SelectApipeline');
         $selectTest->execute();
 
-        $selectTest = new SelectTestB($amount, 'SelectB');
+        $selectTest = new SelectB($amount, 'SelectB');
         $selectTest->execute();
 
     }
