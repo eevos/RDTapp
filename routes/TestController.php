@@ -2,13 +2,14 @@
 
 include_once('RedisTest.php');
 
-include_once('Tests/SelectTestA.php');
-include_once('Tests/SelectTestApipeline.php');
-include_once('Tests/CreateIndexSelectB.php');
+include_once('Tests/SelectA.php');
+include_once('Tests/SelectApipeline.php');
+include_once('Tests/CreateIndex_SelectF.php');
 include_once('Tests/SelectB.php');
+include_once('Tests/SelectF_WithIndexPipeline.php');
 
 include_once('Tests/InsertTestA.php');
-include_once('Tests/InsertTestApipeline.php');
+include_once('Tests/InsertApipeline.php');
 include_once('Tests/InsertTestB.php');
 include_once('Tests/InsertTestBpipeline.php');
 include_once('Tests/InsertBHashPipeline.php');
@@ -37,16 +38,15 @@ class TestController
 
     public function Runtests()
     {
-        $insertTest = new CreateIndexSelectB(1, 'CreateIndexSelectTestB');
-        $insertTest->execute();
+
 
         foreach ($this->amounts as &$amount) {
 
             // maak de inserts/ selects/ updates/ deletes na die in relational db zijn gemaakt
             // A simpel zonder eigenschappen, B+ moeilijkere queries (niet allemaal mogelijk)
 
-            $this->executeInsertTests($amount);
-//            $this->executeSelectTests($amount);
+//            $this->executeInsertTests($amount);
+            $this->executeSelectTests($amount);
 //            $this->executeDeleteTests($amount);
 //            $this->executeUpdateTests($amount);
 
@@ -62,20 +62,33 @@ class TestController
         //A	Insert … autos
         $insertTest = new InsertTestA($amount);
         $insertTest->execute();
-        $insertTest = new InsertTestApipeline($amount);
+        $this->redis->flushdb();
+
+        $insertTest = new InsertApipeline($amount);
         $insertTest->execute();
+        $this->redis->flushdb();
 
         //B	Insert … autos met 2 kleuren
         $insertTest = new InsertTestB($amount);
         $insertTest->execute();
+        $this->redis->flushdb();
+
         $insertTest = new InsertTestBpipeline($amount);
         $insertTest->execute();
+        $this->redis->flushdb();
+
         $insertTest = new InsertBHashPipeline($amount);
         $insertTest->execute();
+        $this->redis->flushdb();
+
         $insertTest = new InsertCHashPipeline($amount);
         $insertTest->execute();
+        $this->redis->flushdb();
+
         $insertTest = new InsertDHashPipeline($amount);
         $insertTest->execute();
+        $this->redis->flushdb();
+
 
 
 
@@ -95,14 +108,19 @@ class TestController
     {
         // SELECT
         // A
-        $selectTest = new SelectTestA($amount, 'SelectA');
+        $selectTest = new SelectA($amount);
         $selectTest->execute();
-        // B
-        $selectTest = new SelectTestApipeline($amount, 'SelectApipeline');
+        $selectTest = new SelectApipeline($amount);
         $selectTest->execute();
 
-        $selectTest = new SelectB($amount, 'SelectB');
+        // B
+        $insertTest = new CreateIndex_SelectF(1);
+        $insertTest->execute();
+//        $selectTest = new SelectB($amount);
+//        $selectTest->execute();
+        $selectTest = new SelectF_WithIndexPipeline($amount);
         $selectTest->execute();
+
 
     }
 

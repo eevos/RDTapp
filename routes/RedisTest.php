@@ -9,12 +9,14 @@ abstract class RedisTest
     protected $startTime;
     protected $endTime;
     protected string $result;
+    protected $resultArray;
     protected string $testName;
 
     function __construct(int $amount){
         $this->redis    = connectToRedis();
         $this->amount   = $amount;
         $this->result   = '';
+        $this->resultArray = [];
         $this->testName = get_class($this);
     }
     public function execute(){
