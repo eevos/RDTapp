@@ -1,6 +1,6 @@
 <?php
 
-class SelectTestA extends RedisTest
+class SelectApipeline extends RedisTest
 {
 
     public function execute(){
@@ -12,12 +12,13 @@ class SelectTestA extends RedisTest
         }
 
         // execute
-
         $this->startTime();
 
-        for ($i = 0; $i < $this->amount; $i++) {
-            $this->result .= $this->redis->get($i);
-        }
+        $this->redis->pipeline(function ($pipe){
+            for ($i = 0; $i < $this->amount; $i++) {
+               $pipe->get($i);
+            }
+        });
 
         $this->endTime();
     }

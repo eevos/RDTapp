@@ -1,6 +1,6 @@
 <?php
 
-class InsertTestApipeline extends RedisTest
+class InsertApipeline extends RedisTest
 {
     public function execute()
     {
@@ -15,7 +15,8 @@ class InsertTestApipeline extends RedisTest
                 $pipe->set($i, json_encode($arr));
             }
             $this->endTime();
-            $this->redis->flushdb();
         });
+        $this->redis->flushdb();
+
     }
 }

@@ -6,6 +6,7 @@ class InsertDHashPipeline extends RedisTest
 
     public function execute()
     {
+        //
         $this->table = DB::select(
             '
                	select 		V.Kenteken, V.Voertuigsoort, V.Merk, V.Eerste_kleur, V.Tweede_kleur
@@ -40,8 +41,6 @@ class InsertDHashPipeline extends RedisTest
         });
 
         $this->endTime();
-
-        $this->redis->flushdb();
 
     }
 }
